@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`gallium-country-lookup`
+Allows user to find countries
+
+@demo demo/index.html 
+-->
+
+<dom-module id="gallium-country-lookup">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'gallium-country-lookup',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'gallium-country-lookup',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
