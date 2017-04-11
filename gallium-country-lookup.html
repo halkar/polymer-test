@@ -8,6 +8,10 @@
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 
+<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../neon-animation/animations/scale-down-animation.html">
+<link rel="import" href="../neon-animation/animations/scale-up-animation.html">
+
 
 <!--
 `gallium-country-lookup`
@@ -30,12 +34,14 @@ Allows user to find countries
     <div class="layot vertical">
       <paper-input value="{{text}}"></paper-input>
       <paper-spinner-lite active$="[[_loading]]"></paper-spinner-lite>
-      <template is="dom-repeat" items="[[_data]]">
-        <paper-material elevation="1">
+      <div id="items" class="layot vertical">
+        <template is="dom-repeat" items="[[_data]]">
+          <paper-material elevation="1">
             <iron-icon src="[[item.flag]]"></iron-icon>
             [[item.name]]
-        </paper-material>
-      </template>
+          </paper-material>
+        </template>
+      </div>
     </div>
   </template>
 
@@ -44,12 +50,36 @@ Allows user to find countries
 
       is: 'gallium-country-lookup',
 
+      behaviors: [
+        Polymer.NeonAnimationRunnerBehavior
+      ],
+
       properties: {
+        animationConfig: {
+          type: Object,
+          value: function () {
+            return {
+              'entry': [{
+                name: 'scale-up-animation',
+                node: this.$.items,
+                transformOrigin: '0 0'
+              }]
+            }
+          }
+        },
         text: String,
         _data: Array,
-        _loading: Boolean
+        _loading: {
+          type: Boolean,
+          observer: '_onLoadingChanged'
+        }
       },
 
+      _onLoadingChanged: function (loading) {
+        if (!loading) {
+          this.playAnimation('entry');
+        }
+      }
     });
   </script>
 </dom-module>
