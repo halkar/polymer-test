@@ -1,5 +1,14 @@
 <link rel="import" href="../polymer/polymer.html">
 
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
+
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+
 <!--
 `gallium-country-lookup`
 Allows user to find countries
@@ -9,12 +18,25 @@ Allows user to find countries
 
 <dom-module id="gallium-country-lookup">
   <template>
-    <style>
-      :host {
+    <style include="iron-flex iron-flex-reverse iron-flex-alignment iron-flex-factors iron-positioning">
+       :host {
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+
+    <iron-ajax auto url="https://restcountries.eu/rest/v2/name/[[text]]" handle-as="json" last-response="{{_data}}" loading="{{_loading}}">
+    </iron-ajax>
+
+    <div class="layot vertical">
+      <paper-input value="{{text}}"></paper-input>
+      <paper-spinner-lite active$="[[_loading]]"></paper-spinner-lite>
+      <template is="dom-repeat" items="[[_data]]">
+        <paper-material elevation="1">
+            <iron-icon src="[[item.flag]]"></iron-icon>
+            [[item.name]]
+        </paper-material>
+      </template>
+    </div>
   </template>
 
   <script>
@@ -23,10 +45,9 @@ Allows user to find countries
       is: 'gallium-country-lookup',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'gallium-country-lookup',
-        },
+        text: String,
+        _data: Array,
+        _loading: Boolean
       },
 
     });

@@ -3,7 +3,13 @@
   "description": "Allows user to find countries",
   "main": "gallium-country-lookup.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "paper-input": "^1.1.23",
+    "paper-spinner": "^1.2.1",
+    "paper-material": "^1.0.6",
+    "iron-flex-layout": "^1.3.2",
+    "iron-ajax": "^1.4.3",
+    "iron-icon": "^1.0.12"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
