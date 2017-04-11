@@ -2,7 +2,7 @@
 
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-material/paper-material.html">
-<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
 
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
@@ -33,7 +33,7 @@ Allows user to find countries
 
     <div class="layot vertical">
       <paper-input value="{{text}}"></paper-input>
-      <paper-spinner-lite active$="[[_loading]]"></paper-spinner-lite>
+      <paper-spinner active$="[[_loading]]"></paper-spinner>
       <div id="items" class="layot vertical">
         <template is="dom-repeat" items="[[_data]]">
           <paper-material elevation="1">
